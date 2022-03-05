@@ -20,7 +20,7 @@ namespace ResourcesApi.Services
 
         public async Task<IEnumerable<Resource>> GetResourcesAsync()
         {
-            var query = _container.GetItemQueryIterator<Resource>(new QueryDefinition(""));
+            var query = _container.GetItemQueryIterator<Resource>(new QueryDefinition("SELECT * FROM Resources"));
             var results = new List<Resource>();
             while (query.HasMoreResults)
             {

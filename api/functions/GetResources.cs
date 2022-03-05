@@ -1,24 +1,20 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Azure.Cosmos;
+using ResourcesApi.Services;
 
 namespace ResourcesApi.Functions
 {
     public class GetResources
     {
-        private readonly Container _container;
+        private readonly ICosmosDbService _cosmosDbService;
 
-        public GetResources(CosmosClient dbClient,
-            string databaseName,
-            string containerName)
+        public GetResources(ICosmosDbService cosmosDbService)
         {
-            _container = dbClient.GetContainer(databaseName, containerName);
+            _cosmosDbService = cosmosDbService;
         }
 
         [FunctionName("resources")]
@@ -28,7 +24,9 @@ namespace ResourcesApi.Functions
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            return new OkObjectResult("Triggered!");
+            var resources = await _cosmosDbService.GetResourcesAsync();
+
+            return new OkObjectResult(resources);
         }
     }
 }
