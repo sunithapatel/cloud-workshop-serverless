@@ -22,10 +22,9 @@ namespace ResourcesApi.Functions
             [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            log.LogInformation("Trigger getting resources from CosmosDb.");
 
             var resources = await _cosmosDbService.GetResourcesAsync();
-
             return new OkObjectResult(resources);
         }
     }

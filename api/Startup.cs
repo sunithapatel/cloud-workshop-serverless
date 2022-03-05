@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,15 +12,20 @@ namespace ResourcesApi
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddSingleton<ICosmosDbService>(s => InitializeCosmosClientInstanceAsync(s.GetService<IConfiguration>().GetSection("CosmosDb")));
+            builder.Services.AddSingleton<ICosmosDbService>(s => InitializeCosmosClientInstance(s.GetService<IConfiguration>()));
         }
 
-        private ICosmosDbService InitializeCosmosClientInstanceAsync(IConfigurationSection configurationSection)
+        private ICosmosDbService InitializeCosmosClientInstance(IConfiguration? configuration)
         {
-            string databaseName = configurationSection.GetSection("DatabaseName").Value;
-            string containerName = configurationSection.GetSection("ContainerName").Value;
-            string account = configurationSection.GetSection("Account").Value;
-            string key = configurationSection.GetSection("Key").Value;
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            }
+            
+            string databaseName = configuration["CosmosDbDatabaseName"];
+            string containerName = configuration["CosmosDbContainerName"];
+            string account = configuration["CosmosDbAccount"];
+            string key = configuration["CosmosDbKey"];
 
             var cosmosClient = new Microsoft.Azure.Cosmos.CosmosClient(account, key);
             CosmosDbService cosmosDbService = new CosmosDbService(cosmosClient, databaseName, containerName);
