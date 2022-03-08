@@ -74,5 +74,9 @@ npm start
 
 ## Deployment to Azure
 
+Run the commands below to create a resource group in Azure to contain all the resources we create.
 
+```
+
+```
 
