@@ -10,6 +10,8 @@ This is a session in the **Let Your Code Fly High!** workshop series hosted in c
 - Backend API - .NET 6 Azure Function
 - Database - Cosmos DB
 
+![Application Architecture](docs/cloud-workshop-architecture.png)
+
 ## Tools for local development
 
 - [Visual Studio Code](https://code.visualstudio.com/)
