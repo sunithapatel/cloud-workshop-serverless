@@ -1,0 +1,41 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "appSettings": {
+            "type": "object"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2021-01-15",
+            "name": "[parameters('name')]",
+            "type": "Microsoft.Web/staticSites",
+            "location": "[parameters('location')]",
+            "sku": {
+                "Tier": "Free",
+                "Name": "Free"
+            },
+            "properties": {
+            },
+            "resources":[
+                {
+                    "apiVersion": "2021-01-15",
+                    "name": "appsettings",
+                    "type": "config",
+                    "location": "[parameters('location')]",
+                    "properties": "[parameters('appSettings')]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/staticSites', parameters('name'))]"
+                    ]
+                }
+            ]
+        }
+    ]
+}
