@@ -78,9 +78,9 @@ Install the CLI using the command below:
 npm install -g @azure/static-web-apps-cli
 ```
 
-To run the React App and the Azure function locally, run the command below:
+To run the React App and the Azure function locally, make sure you are located at the root of the repository and run the command below:
 ```
- swa start http://localhost:3000 --run "npm start" --api-location ./api
+swa start --app-location ./ui http://localhost:3000 --run "npm start" --api-location ./api
 ```
 
 ## Deployment to Azure
