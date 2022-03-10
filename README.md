@@ -1,7 +1,5 @@
 # Workshop to Deploy to Azure Static Web Apps
 
-[![Azure Static Web Apps CI/CD](https://github.com/sunithapatel/cloud-workshop-serverless/actions/workflows/deploy.yaml/badge.svg)](https://github.com/sunithapatel/cloud-workshop-serverless/actions/workflows/deploy.yaml)
-
 This is a session in the **Let Your Code Fly High!** workshop series hosted in collaboration with Women Who Code [Frontend](https://www.womenwhocode.com/frontend) & [Cloud](https://www.womenwhocode.com/cloud) to showcase various ways to deploy a web application to the cloud.
 
 ## Sample Application Architecture
